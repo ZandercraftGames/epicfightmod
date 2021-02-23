@@ -3,7 +3,7 @@ package maninhouse.epicfight.client.renderer.item;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import maninhouse.epicfight.capabilities.entity.LivingData;
-import maninhouse.epicfight.gamedata.Models;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.utils.math.MathUtils;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
 import net.minecraft.client.Minecraft;
@@ -23,7 +23,7 @@ public abstract class RenderItemMirror extends RenderItemBase {
 	public void renderItemInHand(ItemStack stack, LivingData<?> itemHolder, Hand hand, IRenderTypeBuffer buffer, MatrixStack viewMatrixStack, int packedLight) {
 		VisibleMatrix4f modelMatrix = new VisibleMatrix4f(hand == Hand.OFF_HAND ? leftHandCorrectionMatrix : correctionMatrix);
 		String heldingHand = hand == Hand.MAIN_HAND ? "Tool_R" : "Tool_L";
-		VisibleMatrix4f.mul(itemHolder.getEntityModel(Models.LOGICAL_CLIENT).getArmature().findJointByName(heldingHand).getAnimatedTransform(), modelMatrix, modelMatrix);
+		VisibleMatrix4f.mul(itemHolder.getEntityModel(ClientModels.LOGICAL_CLIENT).getArmature().findJointByName(heldingHand).getAnimatedTransform(), modelMatrix, modelMatrix);
 		VisibleMatrix4f transpose = VisibleMatrix4f.transpose(modelMatrix, null);
 		
 		MathUtils.translateStack(viewMatrixStack, modelMatrix);

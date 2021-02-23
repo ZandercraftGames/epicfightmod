@@ -3,8 +3,7 @@ package maninhouse.epicfight.capabilities.item;
 import java.util.UUID;
 
 import maninhouse.epicfight.client.model.ClientModel;
-import maninhouse.epicfight.gamedata.Models;
-import maninhouse.epicfight.gamedata.Models.ClientModels;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.main.EpicFightMod;
 import maninhouse.epicfight.model.Model;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -30,14 +29,16 @@ public class ArmorCapability extends CapabilityItem
 		}
 	}
 	
+	@OnlyIn(Dist.CLIENT)
 	public Model getEquipModel(EquipmentSlotType slot, boolean smallsize)
 	{
 		return equipModel;
 	}
 	
+	@OnlyIn(Dist.CLIENT)
 	public static ClientModel getBipedArmorModel(EquipmentSlotType slot, boolean isBaby)
 	{
-		ClientModels modelDB = Models.LOGICAL_CLIENT;
+		ClientModels modelDB = ClientModels.LOGICAL_CLIENT;
 		
 		switch(slot)
 		{

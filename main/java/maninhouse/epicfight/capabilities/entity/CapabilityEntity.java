@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 public abstract class CapabilityEntity<T extends Entity>
 {
 	protected T orgEntity;
+	private boolean isInitialized = false;
 	
 	public abstract void init();
 	public abstract void update();
@@ -18,11 +19,17 @@ public abstract class CapabilityEntity<T extends Entity>
 	public void setEntity(T vanillaEntity)
 	{
 		this.orgEntity = vanillaEntity;
+		this.isInitialized = true;
 	}
 	
 	public T getOriginalEntity()
 	{
 		return orgEntity;
+	}
+	
+	public boolean isInitialized()
+	{
+		return this.isInitialized;
 	}
 	
 	public boolean isRemote()

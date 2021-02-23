@@ -22,6 +22,7 @@ import maninhouse.epicfight.animation.types.attack.AttackAnimation.Phase;
 import maninhouse.epicfight.animation.types.attack.MountAttackAnimation;
 import maninhouse.epicfight.animation.types.attack.TargetTraceAnimation;
 import maninhouse.epicfight.capabilities.entity.mob.MobAttackPatterns;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.model.Armature;
 import maninhouse.epicfight.utils.game.IExtendedDamageSource.StunType;
 import net.minecraft.util.Hand;
@@ -220,7 +221,7 @@ public final class Animations
 	
 	public static void registerAnimations(Dist dist)
 	{
-		Models modeldata = dist == Dist.CLIENT ? Models.LOGICAL_CLIENT : Models.LOGICAL_SERVER;
+		Models<?> modeldata = dist == Dist.CLIENT ? ClientModels.LOGICAL_CLIENT : Models.LOGICAL_SERVER;
 		
 		Armature biped = modeldata.ENTITY_BIPED.getArmature();
 		Armature biped_child = modeldata.ENTITY_ZOMBIE_CHILD.getArmature();

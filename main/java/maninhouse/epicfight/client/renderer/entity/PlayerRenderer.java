@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
@@ -26,10 +25,9 @@ public class PlayerRenderer extends BipedRenderer<AbstractClientPlayerEntity, Re
 	}
 	
 	@Override
-	protected void renderNameTag(RemoteClientPlayerData<AbstractClientPlayerEntity> entitydata, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+	protected void renderNameTag(RemoteClientPlayerData<AbstractClientPlayerEntity> entitydata, AbstractClientPlayerEntity entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
 		EntityRendererManager renderManager = Minecraft.getInstance().getRenderManager();
-		PlayerEntity entityIn = entitydata.getOriginalEntity();
-
+		
 		double d0 = renderManager.squareDistanceTo(entityIn);
 		matrixStackIn.push();
 		if (d0 < 100.0D) {
@@ -37,14 +35,14 @@ public class PlayerRenderer extends BipedRenderer<AbstractClientPlayerEntity, Re
 			ScoreObjective scoreobjective = scoreboard.getObjectiveInDisplaySlot(2);
 			if (scoreobjective != null) {
 				Score score = scoreboard.getOrCreateScore(entityIn.getScoreboardName(), scoreobjective);
-				super.renderNameTag(entitydata, (
+				super.renderNameTag(entitydata, entityIn, (
 						new StringTextComponent(Integer.toString(score.getScorePoints()))).appendString(" ").append(scoreobjective.getDisplayName()),
 						matrixStackIn, bufferIn, packedLightIn);
 				matrixStackIn.translate(0.0D, (double) (9.0F * 1.15F * 0.025F), 0.0D);
 			}
 		}
 
-		super.renderNameTag(entitydata, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
+		super.renderNameTag(entitydata, entityIn, displayNameIn, matrixStackIn, bufferIn, packedLightIn);
 		matrixStackIn.pop();
 	}
 }

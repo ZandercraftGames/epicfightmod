@@ -6,7 +6,7 @@ import maninhouse.epicfight.animation.Joint;
 import maninhouse.epicfight.capabilities.ModCapabilities;
 import maninhouse.epicfight.capabilities.entity.LivingData;
 import maninhouse.epicfight.client.ClientEngine;
-import maninhouse.epicfight.gamedata.Models;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.SpriteTexturedParticle;
@@ -47,7 +47,7 @@ public class HierarchicalParticle extends SpriteTexturedParticle
 	public void renderParticle(IVertexBuilder buffer, ActiveRenderInfo entityIn, float partialTicks)
 	{
 		this.entitydata.getClientAnimator().setPoseToModel();
-		Joint joint = this.entitydata.getEntityModel(Models.LOGICAL_CLIENT).getArmature().findJointById(this.jointKey);
+		Joint joint = this.entitydata.getEntityModel(ClientModels.LOGICAL_CLIENT).getArmature().findJointById(this.jointKey);
 		VisibleMatrix4f jointTransform = VisibleMatrix4f.mul(joint.getAnimatedTransform(), this.entitydata.getModelMatrix(ClientEngine.INSTANCE.renderEngine.getPartialTicks()), null);
 		this.posX = jointTransform.m30;
 		this.posY = jointTransform.m31;

@@ -3,7 +3,7 @@ package maninhouse.epicfight.client.renderer.item;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import maninhouse.epicfight.capabilities.entity.LivingData;
-import maninhouse.epicfight.gamedata.Models;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.item.ModItems;
 import maninhouse.epicfight.utils.math.MathUtils;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
@@ -26,14 +26,14 @@ public class RenderKatana extends RenderItemBase
 	{
 		viewMatrixStack.push();
 		VisibleMatrix4f modelMatrix = new VisibleMatrix4f(correctionMatrix);
-		VisibleMatrix4f.mul(itemHolder.getEntityModel(Models.LOGICAL_CLIENT).getArmature().findJointByName("Tool_R").getAnimatedTransform(), modelMatrix, modelMatrix);
+		VisibleMatrix4f.mul(itemHolder.getEntityModel(ClientModels.LOGICAL_CLIENT).getArmature().findJointByName("Tool_R").getAnimatedTransform(), modelMatrix, modelMatrix);
 		VisibleMatrix4f transpose = VisibleMatrix4f.transpose(modelMatrix, null);
 		MathUtils.translateStack(viewMatrixStack, modelMatrix);
 		MathUtils.rotateStack(viewMatrixStack, transpose);
         Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND, packedLight, OverlayTexture.NO_OVERLAY, viewMatrixStack, buffer);
         viewMatrixStack.pop();
 		modelMatrix = new VisibleMatrix4f(correctionMatrix);
-		VisibleMatrix4f.mul(itemHolder.getEntityModel(Models.LOGICAL_CLIENT).getArmature().findJointByName("Tool_L").getAnimatedTransform(), modelMatrix, modelMatrix);
+		VisibleMatrix4f.mul(itemHolder.getEntityModel(ClientModels.LOGICAL_CLIENT).getArmature().findJointByName("Tool_L").getAnimatedTransform(), modelMatrix, modelMatrix);
 		transpose = VisibleMatrix4f.transpose(modelMatrix, null);
 		MathUtils.translateStack(viewMatrixStack, modelMatrix);
 		MathUtils.rotateStack(viewMatrixStack, transpose);

@@ -15,6 +15,7 @@ import maninhouse.epicfight.client.events.RegistryClientEvent;
 import maninhouse.epicfight.client.events.engine.ControllEngine;
 import maninhouse.epicfight.client.events.engine.RenderEngine;
 import maninhouse.epicfight.client.input.ModKeys;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.client.shader.Shaders;
 import maninhouse.epicfight.config.Configuration;
 import maninhouse.epicfight.entity.ai.attribute.ModAttributes;
@@ -57,14 +58,13 @@ public class EpicFightMod
     {
     	ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.CONFIG, CONFIG_FILE_PATH);
     	
-    	if(isPhysicalClient())
-    	{
-    		Models.LOGICAL_CLIENT.buildArmatureData();
+    	if(isPhysicalClient()) {
+    		ClientModels.LOGICAL_CLIENT.buildArmatureData();
     		Models.LOGICAL_SERVER.buildArmatureData();
     		mainThreadTaskQueue = ObfuscationReflectionHelper.findField(Minecraft.class, "field_213275_aU");
-    	}
-    	else
+    	} else {
     		Models.LOGICAL_SERVER.buildArmatureData();
+    	}
     	
     	Animations.registerAnimations(FMLEnvironment.dist);
     	
@@ -94,7 +94,7 @@ public class EpicFightMod
 		{
 			((Queue<Runnable>) mainThreadTaskQueue.get(Minecraft.getInstance())).add(() -> {
 				Shaders.loadShaders();
-				Models.LOGICAL_CLIENT.buildMeshData();
+				ClientModels.LOGICAL_CLIENT.buildMeshData();
 				ClientEngine.INSTANCE.renderEngine.buildRenderer();
 			});
 		}

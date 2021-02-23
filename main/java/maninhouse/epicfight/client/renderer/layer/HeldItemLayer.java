@@ -33,7 +33,8 @@ public class HeldItemLayer<E extends LivingEntity, T extends LivingData<E>> exte
 			}
 			renderEngine.getItemRenderer(mainHandStack.getItem()).renderItemInHand(mainHandStack, entitydata, Hand.MAIN_HAND, buffer, matrixStackIn, packedLightIn);
 		}
-		
+		matrixStackIn.pop();
+		matrixStackIn.push();
 		ItemStack offHandStack = entitydata.getOriginalEntity().getHeldItemOffhand();
 		
 		if (offHandStack.getItem() != Items.AIR) {

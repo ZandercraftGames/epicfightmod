@@ -15,8 +15,8 @@ import maninhouse.epicfight.animation.types.StaticAnimation;
 import maninhouse.epicfight.capabilities.entity.LivingData;
 import maninhouse.epicfight.capabilities.entity.LivingData.EntityState;
 import maninhouse.epicfight.client.ClientEngine;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.gamedata.Animations;
-import maninhouse.epicfight.gamedata.Models;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
 
 public class AnimatorClient extends Animator
@@ -196,9 +196,9 @@ public class AnimatorClient extends Animator
 	public void setPoseToModel()
 	{
 		if(mixLayerActivated)
-			applyPoseToJoint(getCurrentPose(baseLayer), getCurrentPose(mixLayer), entitydata.getEntityModel(Models.LOGICAL_CLIENT).getArmature().getJointHierarcy(), new VisibleMatrix4f());
+			applyPoseToJoint(getCurrentPose(baseLayer), getCurrentPose(mixLayer), entitydata.getEntityModel(ClientModels.LOGICAL_CLIENT).getArmature().getJointHierarcy(), new VisibleMatrix4f());
 		else
-			applyPoseToJoint(getCurrentPose(baseLayer), entitydata.getEntityModel(Models.LOGICAL_CLIENT).getArmature().getJointHierarcy(), new VisibleMatrix4f());
+			applyPoseToJoint(getCurrentPose(baseLayer), entitydata.getEntityModel(ClientModels.LOGICAL_CLIENT).getArmature().getJointHierarcy(), new VisibleMatrix4f());
 	}
 	
 	private void applyPoseToJoint(Pose base, Pose mix, Joint joint, VisibleMatrix4f parentTransform)

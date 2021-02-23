@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import maninhouse.epicfight.capabilities.entity.LivingData;
-import maninhouse.epicfight.gamedata.Models;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.utils.math.MathUtils;
 import maninhouse.epicfight.utils.math.Vec3f;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
@@ -36,7 +36,7 @@ public class RenderElytra extends RenderItemBase {
 		VisibleMatrix4f modelMatrix = new VisibleMatrix4f();
 		VisibleMatrix4f.scale(new Vec3f(-0.9F, -0.9F, 0.9F), modelMatrix, modelMatrix);
 		VisibleMatrix4f.translate(new Vec3f(0F, -0.5F, 0.125F), modelMatrix, modelMatrix);
-		VisibleMatrix4f.mul(itemHolder.getEntityModel(Models.LOGICAL_CLIENT).getArmature().findJointById(8).getAnimatedTransform(), modelMatrix, modelMatrix);
+		VisibleMatrix4f.mul(itemHolder.getEntityModel(ClientModels.LOGICAL_CLIENT).getArmature().findJointById(8).getAnimatedTransform(), modelMatrix, modelMatrix);
 		VisibleMatrix4f transpose = VisibleMatrix4f.transpose(modelMatrix, null);
 		MathUtils.translateStack(viewMatrixStack, modelMatrix);
 		MathUtils.rotateStack(viewMatrixStack, transpose);

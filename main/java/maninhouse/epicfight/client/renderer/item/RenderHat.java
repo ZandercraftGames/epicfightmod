@@ -3,7 +3,7 @@ package maninhouse.epicfight.client.renderer.item;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import maninhouse.epicfight.capabilities.entity.LivingData;
-import maninhouse.epicfight.gamedata.Models;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.utils.math.MathUtils;
 import maninhouse.epicfight.utils.math.Vec3f;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
@@ -33,7 +33,7 @@ public class RenderHat extends RenderItemBase {
 			if(itemHolder.getOriginalEntity().isChild()) {
 				VisibleMatrix4f.translate(new Vec3f(0.0F, -0.65F, 0.0F), modelMatrix, modelMatrix);
 			}
-			VisibleMatrix4f.mul(itemHolder.getEntityModel(Models.LOGICAL_CLIENT).getArmature().findJointById(9).getAnimatedTransform(), modelMatrix, modelMatrix);
+			VisibleMatrix4f.mul(itemHolder.getEntityModel(ClientModels.LOGICAL_CLIENT).getArmature().findJointById(9).getAnimatedTransform(), modelMatrix, modelMatrix);
 			model.rotateAngleX = 0;
 			model.rotateAngleY = 0;
 			model.rotateAngleZ = 0;

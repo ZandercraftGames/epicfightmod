@@ -75,14 +75,14 @@ public class EntityEvents
 	{
 		CapabilityEntity entitydata = event.getEntity().getCapability(ModCapabilities.CAPABILITY_ENTITY, null).orElse(null);
 		
-		if(entitydata != null && event.getEntity().ticksExisted == 0)
-		{
+		if(entitydata != null && event.getEntity().ticksExisted == 0) {
 			entitydata.setEntity(event.getEntity());
 			entitydata.init();
-			if(entitydata.isRemote())
+			if(entitydata.isRemote()) {
 				unInitializedEntitiesClient.add(entitydata);
-			else
+			} else {
 				unInitializedEntitiesServer.add(entitydata);
+			}
 		}
 	}
 	
@@ -361,15 +361,17 @@ public class EntityEvents
 	@SubscribeEvent
 	public static void effectAddEvent(PotionAddedEvent event)
 	{
-		if(!event.getEntity().world.isRemote)
+		if(!event.getEntity().world.isRemote) {
 			ModNetworkManager.sendToAll(new STCPotion(event.getPotionEffect().getPotion(), Action.Active, event.getEntity().getEntityId()));
+		}
 	}
 	
 	@SubscribeEvent
 	public static void effectRemoveEvent(PotionRemoveEvent event)
 	{
-		if(!event.getEntity().world.isRemote)
+		if(!event.getEntity().world.isRemote && event.getPotionEffect() != null) {
 			ModNetworkManager.sendToAll(new STCPotion(event.getPotionEffect().getPotion(), Action.Remove, event.getEntity().getEntityId()));
+		}
 	}
 	
 	@SubscribeEvent

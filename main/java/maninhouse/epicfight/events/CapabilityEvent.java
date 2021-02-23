@@ -31,12 +31,9 @@ public class CapabilityEvent
 	@SubscribeEvent
 	public static void attachEntityCapability(AttachCapabilitiesEvent<Entity> event)
 	{
-		if(event.getObject().getCapability(ModCapabilities.CAPABILITY_ENTITY).orElse(null) == null)
-		{
+		if(event.getObject().getCapability(ModCapabilities.CAPABILITY_ENTITY).orElse(null) == null) {
 			ProviderEntity prov = new ProviderEntity(event.getObject());
-			
-			if(prov.hasCapability())
-			{
+			if(prov.hasCapability()) {
 				event.addCapability(new ResourceLocation(EpicFightMod.MODID + "entitycap"), prov);
 			}
 		}

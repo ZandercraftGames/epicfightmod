@@ -9,8 +9,8 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import maninhouse.epicfight.capabilities.entity.mob.ZombieData;
 import maninhouse.epicfight.client.model.ClientModel;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.client.renderer.ModRenderTypes;
-import maninhouse.epicfight.gamedata.Models;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -41,9 +41,9 @@ public class VillagerProfessionLayer extends Layer<ZombieVillagerEntity, ZombieD
 	public void renderLayer(ZombieData<ZombieVillagerEntity> entitydata, ZombieVillagerEntity entityliving,
 			MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, VisibleMatrix4f[] poses) {
 		
-		ClientModel model1 = entitydata.getEntityModel(Models.LOGICAL_CLIENT);
-		ClientModel model2 = entityliving.isChild() ? Models.LOGICAL_CLIENT.ENTITY_VILLAGER_ZOMBIE_CHILD_BODY : 
-			Models.LOGICAL_CLIENT.ENTITY_VILLAGER_ZOMBIE_BODY;
+		ClientModel model1 = entitydata.getEntityModel(ClientModels.LOGICAL_CLIENT);
+		ClientModel model2 = entityliving.isChild() ? ClientModels.LOGICAL_CLIENT.ENTITY_VILLAGER_ZOMBIE_CHILD_BODY : 
+			ClientModels.LOGICAL_CLIENT.ENTITY_VILLAGER_ZOMBIE_BODY;
 		
 		ClientModel drawingModel;
 		VillagerData villagerdata = ((IVillagerDataHolder)entitydata.getOriginalEntity()).getVillagerData();

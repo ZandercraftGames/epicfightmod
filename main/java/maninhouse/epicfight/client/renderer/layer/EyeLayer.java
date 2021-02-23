@@ -4,8 +4,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import maninhouse.epicfight.capabilities.entity.LivingData;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.client.renderer.ModRenderTypes;
-import maninhouse.epicfight.gamedata.Models;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -25,6 +25,6 @@ public class EyeLayer<E extends LivingEntity, T extends LivingData<E>> extends L
 	@Override
 	public void renderLayer(T entitydata, E entityliving, MatrixStack matrixStackIn, IRenderTypeBuffer buffer, int packedLightIn, VisibleMatrix4f[] poses) {
 		IVertexBuilder ivertexbuilder = buffer.getBuffer(renderType);
-		entitydata.getEntityModel(Models.LOGICAL_CLIENT).draw(matrixStackIn, ivertexbuilder, 15728640, 1.0F, 1.0F, 1.0F, 1.0F, poses);
+		entitydata.getEntityModel(ClientModels.LOGICAL_CLIENT).draw(matrixStackIn, ivertexbuilder, 15728640, 1.0F, 1.0F, 1.0F, 1.0F, poses);
 	}
 }

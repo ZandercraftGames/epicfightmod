@@ -9,9 +9,9 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import maninhouse.epicfight.animation.Joint;
 import maninhouse.epicfight.capabilities.entity.LivingData;
 import maninhouse.epicfight.client.model.ClientModel;
+import maninhouse.epicfight.client.model.ClientModels;
 import maninhouse.epicfight.client.renderer.ModRenderTypes;
 import maninhouse.epicfight.client.renderer.layer.Layer;
-import maninhouse.epicfight.gamedata.Models;
 import maninhouse.epicfight.model.Armature;
 import maninhouse.epicfight.utils.math.MathUtils;
 import maninhouse.epicfight.utils.math.VisibleMatrix4f;
@@ -44,10 +44,10 @@ public abstract class ArmatureRenderer<E extends LivingEntity, T extends LivingD
 	}
 	
 	public void render(E entityIn, T entitydata, EntityRenderer<? extends Entity> renderer, IRenderTypeBuffer buffer, MatrixStack matStack, int packedLightIn, float partialTicks) {
-		if(this.shouldRenderNameTag(entitydata)) {
+		if(this.shouldRenderNameTag(entitydata, entityIn)) {
 			RenderNameplateEvent renderNameplateEvent = new RenderNameplateEvent(entityIn, entityIn.getDisplayName(), renderer, matStack, buffer, packedLightIn, partialTicks);
 		    MinecraftForge.EVENT_BUS.post(renderNameplateEvent);
-			this.renderNameTag(entitydata, renderNameplateEvent.getContent(), matStack, buffer, packedLightIn);
+			this.renderNameTag(entitydata, entityIn, renderNameplateEvent.getContent(), matStack, buffer, packedLightIn);
 		}
 		
 		Minecraft mc = Minecraft.getInstance();
@@ -58,7 +58,7 @@ public abstract class ArmatureRenderer<E extends LivingEntity, T extends LivingD
 		
 		if(renderType != null) {
 			IVertexBuilder builder = buffer.getBuffer(renderType);
-			ClientModel model = entitydata.getEntityModel(Models.LOGICAL_CLIENT);
+			ClientModel model = entitydata.getEntityModel(ClientModels.LOGICAL_CLIENT);
 			Armature armature = model.getArmature();
 			armature.initializeTransform();
 			matStack.push();
@@ -141,9 +141,7 @@ public abstract class ArmatureRenderer<E extends LivingEntity, T extends LivingD
         MathUtils.scaleStack(matStack, transpose);
 	}
 	
-	protected boolean shouldRenderNameTag(T entitydata) {
-		Entity entity = entitydata.getOriginalEntity();
-		
+	protected boolean shouldRenderNameTag(T entitydata, E entity) {
 		boolean flag1;
 		double d0 = Minecraft.getInstance().renderViewEntity.getDistanceSq(entity);
 		float f = entity.isDiscrete() ? 32.0F : 64.0F;
@@ -182,10 +180,9 @@ public abstract class ArmatureRenderer<E extends LivingEntity, T extends LivingD
 						|| entity instanceof PlayerEntity));
 	}
 	
-	protected void renderNameTag(T entitydata, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+	protected void renderNameTag(T entitydata, E entityIn, ITextComponent displayNameIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
 		EntityRendererManager renderManager = Minecraft.getInstance().getRenderManager();
-		Entity entityIn = entitydata.getOriginalEntity();
-
+		
 		double d0 = renderManager.squareDistanceTo(entityIn);
 		if (net.minecraftforge.client.ForgeHooksClient.isNameplateInRenderDistance(entityIn, d0)) {
 			boolean flag = !entityIn.isDiscrete();

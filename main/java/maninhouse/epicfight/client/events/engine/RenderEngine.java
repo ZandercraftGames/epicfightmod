@@ -381,8 +381,7 @@ public class RenderEngine {
 					return;
 				}
 				LivingData<?> entitydata = (LivingData<?>) livingentity.getCapability(ModCapabilities.CAPABILITY_ENTITY, null).orElse(null);
-
-				if (entitydata != null) {
+				if (entitydata != null && entitydata.isInitialized()) {
 					event.setCanceled(true);
 					renderEngine.renderEntityArmatureModel(livingentity, entitydata, event.getRenderer(), event.getBuffers(), event.getMatrixStack(), event.getLight(), event.getPartialRenderTick());
 				}
